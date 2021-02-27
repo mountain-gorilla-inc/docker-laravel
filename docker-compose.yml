@@ -7,19 +7,19 @@ services:
     build: ./infra/docker/php
     volumes:
       - php-fpm-socket:/var/run/php-fpm
-      - ./backend:/work/backend
+      - ../beginner-lessons/beginner-lesson1:/work/backend
 
   web:
     build: ./infra/docker/nginx
     ports:
-      - 80:80
+      - 8080:80
     volumes:
       - php-fpm-socket:/var/run/php-fpm
-      - ./backend:/work/backend
+      - ../beginner-lessons/beginner-lesson1:/work/backend
 
   db:
     build: ./infra/docker/mysql
     ports:
-      - 3306:3306
+      - 13306:3306
     volumes:
       - db-store:/var/lib/mysql

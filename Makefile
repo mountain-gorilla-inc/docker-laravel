@@ -19,10 +19,12 @@ install-recommend-packages:
 init:
 	docker-compose up -d --build
 	docker-compose exec app composer install
-	docker-compose exec app cp .env.example .env
 	docker-compose exec app php artisan key:generate
 	docker-compose exec app php artisan storage:link
 	docker-compose exec app php artisan migrate:fresh --seed
+	docker-compose exec app php artisan key:generate
+	docker-compose exec web npm install
+	docker-compose exec web npm run production
 remake:
 	@make destroy
 	@make init
